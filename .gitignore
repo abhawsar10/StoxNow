@@ -7,3 +7,24 @@ __pycache__/
 backend/StoxNowVenv
 backend/stoxnow.db
 
+# dependencies
+/stox-now-app/node_modules
+/stox-now-app/.pnp
+/stox-now-app/.pnp.js
+
+# testing
+/stox-now-app/coverage
+
+# production
+/stox-now-app/build
+
+# misc
+stox-now-app/.DS_Store
+stox-now-app/.env.local
+stox-now-app/.env.development.local
+stox-now-app/.env.test.local
+stox-now-app/.env.production.local
+
+stox-now-app/npm-debug.log*
+stox-now-app/yarn-debug.log*
+stox-now-app/yarn-error.log*
