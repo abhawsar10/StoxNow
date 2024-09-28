@@ -6,10 +6,10 @@ export const fetchStockData = async (ticker: string) => {
         const response = await fetch(`${API_BASE_URL}/stock/${ticker}`);
 
         if (!response.ok) {
-        if (response.status === 404) {
-            throw new Error(`Ticker '${ticker}' not found.`);
-        }
-        throw new Error('An error occurred while fetching stock data.');
+            if (response.status === 404) {
+                throw new Error(`Ticker '${ticker}' not found.`);
+            }
+            throw new Error('An error occurred while fetching stock data.');
         }
 
         const data = await response.json();
@@ -25,7 +25,7 @@ export const buyStock = async (ticker: string, quantity: number) => {
   const response = await fetch(`${API_BASE_URL}/buy`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ticker, quantity })
+    body: JSON.stringify({ 'ticker': ticker, 'quantity': quantity })
   });
   return response.json();
 };
