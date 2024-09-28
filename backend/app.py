@@ -9,7 +9,8 @@ def create_database():
     c.execute('''
                 CREATE TABLE IF NOT EXISTS portfolio (
                     ticker TEXT PRIMARY KEY,
-                    quantity INTEGER NOT NULL
+                    quantity REAL NOT NULL,
+                    value REAL NOT NULL
                 )
             ''')
     print("Portfolio Table Created")

@@ -15,7 +15,7 @@ def fetch_stock_data(ticker):
     try:
         stock = yf.Ticker(ticker)
         data = stock.info
-        
+
         if 'symbol' not in data or 'longName' not in data:
             raise ValueError("Invalid ticker")
         
@@ -52,6 +52,10 @@ def buy_stock():
     ticker = data['ticker']
     quantity = data['quantity']
 
+    stock = fetch_stock_data(ticker)
+    price = stock['price']
+    total_value = price * quantity
+
     with get_db() as db:
         cursor = db.cursor()
 
@@ -62,22 +66,24 @@ def buy_stock():
         if existing_stock:
 
             new_quantity = existing_stock['quantity'] + quantity
+            new_value = price * new_quantity
             cursor.execute(
-                'UPDATE portfolio SET quantity = ? WHERE ticker = ?',
-                (new_quantity, ticker)
+                'UPDATE portfolio SET quantity = ?, value = ? WHERE ticker = ?',
+                (new_quantity, new_value, ticker)
             )
 
         else:
             cursor.execute(
-                'INSERT INTO portfolio (ticker, quantity) VALUES (?, ?)',
-                (ticker, quantity)
+                'INSERT INTO portfolio (ticker, quantity, value) VALUES (?, ?, ?)',
+                (ticker, quantity, total_value)
             )
         
     db.commit()
     status_code = 200 if existing_stock else 201
     return jsonify({
         'ticker': ticker,
-        'quantity': quantity
+        'quantity': quantity,
+        'value': total_value,
     }), status_code
 
 
@@ -86,6 +92,9 @@ def sell_stock():
     data = request.json
     ticker = data['ticker']
     quantity_to_sell  = data['quantity']
+
+    stock = fetch_stock_data(ticker)
+    current_price = stock['price']
 
     with get_db() as db:
         cursor = db.cursor()
@@ -105,13 +114,14 @@ def sell_stock():
             cursor.execute('DELETE FROM portfolio WHERE ticker = ?', (ticker,))
         else:
             cursor.execute(
-                'UPDATE portfolio SET quantity = ? WHERE ticker = ?',
-                (new_quantity, ticker)
+                'UPDATE portfolio SET quantity = ?, value = ? WHERE ticker = ?',
+                (new_quantity, new_quantity*current_price, ticker)
             )
 
     db.commit()
 
     return jsonify({
         'ticker': ticker,
+        'amount': quantity_to_sell*current_price,
         'remaining_quantity': new_quantity
     }), 200
