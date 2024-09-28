@@ -1,6 +1,6 @@
 
 import sqlite3
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, abort, jsonify, request
 import yfinance as yf
 
 api = Blueprint('main', __name__,)
@@ -12,13 +12,21 @@ def get_db():
     return db
 
 def fetch_stock_data(ticker):
-    stock = yf.Ticker(ticker)
-    data = stock.info
-    return {
-        'symbol': data.get('symbol'),
-        'name': data.get('longName'),
-        'price': data.get('currentPrice')
-    }
+    try:
+        stock = yf.Ticker(ticker)
+        data = stock.info
+        
+        if 'symbol' not in data or 'longName' not in data:
+            raise ValueError("Invalid ticker")
+        
+        return {
+            'symbol': data.get('symbol'),
+            'name': data.get('longName'),
+            'price': data.get('currentPrice')
+        }
+    except Exception as e:
+        print(f"Error fetching data for ticker {ticker}: {e}")
+        abort(404, description=f"Ticker '{ticker}' not found.")
 
 @api.route('/')
 def status_check():
@@ -30,13 +38,13 @@ def status_check_api():
 
 @api.route('/api/stock/<ticker>')
 def get_stock(ticker):
-    return jsonify(fetch_stock_data(ticker))
+    return jsonify(fetch_stock_data(ticker)), 200
 
 @api.route('/api/portfolio')
 def get_portfolio():
     with get_db() as db:
         stocks = db.execute('SELECT * FROM portfolio').fetchall()
-    return jsonify([dict(stock) for stock in stocks])
+    return jsonify([dict(stock) for stock in stocks]), 200
 
 @api.route('/api/buy', methods=['POST'])
 def buy_stock():
