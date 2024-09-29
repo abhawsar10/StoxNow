@@ -42,6 +42,9 @@ const StockSearch: React.FC = () => {
 
   return (
     <div className="stock-search">
+      <div className="stock-search-title">
+        <h1>Search</h1>
+      </div>
       <div className="input-container">
         <input
           type="text"

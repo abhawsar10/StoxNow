@@ -8,6 +8,7 @@ const Portfolio: React.FC = () => {
     const [portfolio, setPortfolio] = useState<any[]>([])
     const [portfolioValue, setPortfolioValue] = useState(0)
     const [totalStocks, setTotalStocks] = useState(0)
+    const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'ascending' | 'descending' } | null>(null);
 
     async function getPortfolio(){
         const stocks = await fetchPortfolio();
@@ -26,6 +27,22 @@ const Portfolio: React.FC = () => {
         setPortfolio(stocks)
     }
 
+    const sortPortfolio = (key: string) => {
+        let direction: 'ascending' | 'descending' = 'ascending';
+        if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+        
+        const sortedPortfolio = [...portfolio].sort((a, b) => {
+            if (a[key] < b[key]) return direction === 'ascending' ? -1 : 1;
+            if (a[key] > b[key]) return direction === 'ascending' ? 1 : -1;
+            return 0;
+        });
+        
+        setPortfolio(sortedPortfolio);
+    };
+
     useEffect(()=>{
         getPortfolio();
     },[])
@@ -43,10 +60,16 @@ const Portfolio: React.FC = () => {
                 </div>
             </div>
             <div className='portfolio-titles'>
-                <div>Ticker</div>
-                <div>Quantity</div>
-                <div>Current Value</div>
-                <div>Option</div>
+                <div onClick={() => sortPortfolio('ticker')}>
+                    Ticker {sortConfig?.key === 'ticker' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                </div>
+                <div onClick={() => sortPortfolio('quantity')}>
+                    Quantity {sortConfig?.key === 'quantity' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                </div>
+                <div onClick={() => sortPortfolio('value')}>
+                    Current Value {sortConfig?.key === 'value' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                </div>
+                <>Option</>
             </div>
             {portfolio.map((item)=>(
                 <PortfolioItem key={item.ticker} portfolioStock={item} getPortfolio={getPortfolio} />

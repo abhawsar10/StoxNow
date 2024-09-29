@@ -3,6 +3,7 @@
     width: 100%;
     max-width: 1000px;
     margin-bottom: 100px;
+    margin-top: 20px;
 }
 
 .portfolio-header {
@@ -37,4 +38,10 @@
     margin: 20px;
     box-sizing: border-box; 
     padding-right: 50px;
+}
+
+
+.portfolio-titles div {
+    cursor: pointer;
+    user-select: none;
 }
