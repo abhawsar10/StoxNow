@@ -22,7 +22,12 @@ def fetch_stock_data(ticker):
         return {
             'symbol': data.get('symbol'),
             'name': data.get('longName'),
-            'price': data.get('currentPrice')
+            'price': data.get('currentPrice'),
+            'previousClose': data.get('previousClose'),
+            'volume': data.get('volume'),
+            'marketCap': data.get('marketCap'),
+            'fiftyTwoWeekLow': data.get('fiftyTwoWeekLow'),
+            'fiftyTwoWeekHigh': data.get('fiftyTwoWeekHigh'),
         }
     except Exception as e:
         print(f"Error fetching data for ticker {ticker}: {e}")

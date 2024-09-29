@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { buyStock, fetchStockData } from '../../services/api';
 import './StockSearch.css'
 import { formatCurrency } from '../../services/currencyFormatter';
+import StockInfo from '../StockInfo/StockInfo';
 
 const StockSearch: React.FC = () => {
     
@@ -50,7 +51,7 @@ const StockSearch: React.FC = () => {
   return (
     <div className="stock-search">
       <div className="stock-search-title">
-        <h1>Search</h1>
+        <div>Search</div>
       </div>
       <div className="input-container">
         <input
@@ -64,28 +65,13 @@ const StockSearch: React.FC = () => {
       </div>
 
       {stockData && (
-        <div className="stock-container">
-          <div className='stock-info'>
-            <div className='stock-title'>
-              <h1>{stockData.symbol}</h1>
-              <h2>{stockData.name}</h2>
-            </div>
-            <div className='stock-title'>
-              <h1>{formatCurrency(stockData.price)}</h1>
-            </div>
-          </div>
-
-          <div>
-            <input
-              className='quantity-input'
-              type="number"
-              min="1"
-              value={buyQuantity}
-              onChange={(e) => setBuyQuantity(Number(e.target.value))}
-            />
-            <button className='buy-button' onClick={handleBuy}>Buy</button>
-          </div>
-        </div>
+        <StockInfo
+          stockData={stockData}
+          buyQuantity={buyQuantity}
+          setBuyQuantity={setBuyQuantity}
+          handleBuy={handleBuy}
+          formatCurrency={formatCurrency}
+        />
       )}
     </div>
   );
