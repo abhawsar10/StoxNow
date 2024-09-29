@@ -130,3 +130,35 @@ def sell_stock():
         'amount': quantity_to_sell*current_price,
         'remaining_quantity': new_quantity
     }), 200
+
+@api.route('/api/update-portfolio', methods=['POST'])
+def update_portfolio():
+    with get_db() as db:
+        cursor = db.cursor()
+
+        stocks = cursor.execute('SELECT * FROM portfolio').fetchall()
+        updates = []
+
+        for stock in stocks:
+            ticker = stock['ticker']
+            quantity = stock['quantity']
+            old_price = stock['value']/quantity
+
+            stock_data = fetch_stock_data(ticker)
+            current_price = stock_data['price']
+
+            if current_price != old_price:
+                new_value = quantity * current_price
+                updates.append({'ticker': stock['ticker'], 'new_value': new_value})
+
+                cursor.execute(
+                    'UPDATE portfolio SET value = ? WHERE ticker = ?',
+                    (new_value, ticker)
+                )
+
+    db.commit()
+
+    return jsonify({
+        'status': 'Portfolio updated successfully',
+        'updated_stocks': updates
+    }), 200
