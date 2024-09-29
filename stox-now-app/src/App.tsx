@@ -13,10 +13,10 @@ function App() {
           <a href='/'><h1>StoxNow</h1></a>
           <nav>
             <Link to="/search" title="Search Stock" className={location.pathname === "/search" || location.pathname === "/"? "active" : ""}>
-              <FaSearch size={24} />
+              <FaSearch size={26} />
             </Link>
             <Link to="/portfolio" title="View Portfolio" className={location.pathname === "/portfolio" ? "active" : ""}>
-              <FaChartLine size={24} />
+              <FaChartLine size={26} />
             </Link>
           </nav>
         </header>
