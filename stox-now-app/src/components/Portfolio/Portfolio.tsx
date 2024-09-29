@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Portfolio.css'
 import { fetchPortfolio } from '../../services/api';
 import PortfolioItem from '../PortfolioItem/PortfolioItem';
+import { formatCurrency } from '../../services/currencyFormatter';
 
 const Portfolio: React.FC = () => {
     
@@ -52,11 +53,11 @@ const Portfolio: React.FC = () => {
             <div className='portfolio-header'>
                 <div className='portfolio-header-row'>
                     <h1>Your Portfolio</h1>
-                    <h1>$ {portfolioValue.toFixed(2)}</h1>
+                    <h1 className='number-font'>{formatCurrency(portfolioValue)}</h1>
                 </div>
                 <div className='portfolio-header-row'>
                     <h2>Total Stocks Owned</h2>
-                    <h2>{totalStocks.toFixed(2)}</h2>
+                    <h2 className='number-font'>{totalStocks.toFixed(2)}</h2>
                 </div>
             </div>
             <div className='portfolio-titles'>

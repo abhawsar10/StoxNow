@@ -3,11 +3,16 @@
   min-height: 100vh;
   background-color: #1e2126;
   color: white;
+  
 }
 
 .App-header {
+  
+  font-family: "Satisfy", cursive;
+  font-weight: 400;
+  font-style: normal;
   height: 120px;
-  padding-left: 50px;
+  padding-left: 150px;
   padding-right: 50px; 
   display: flex;
   background-color: #301a39;

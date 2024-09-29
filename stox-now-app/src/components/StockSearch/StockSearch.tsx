@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { buyStock, fetchStockData } from '../../services/api';
 import './StockSearch.css'
+import { formatCurrency } from '../../services/currencyFormatter';
 
 const StockSearch: React.FC = () => {
     
@@ -63,7 +64,7 @@ const StockSearch: React.FC = () => {
               <h2>{stockData.name}</h2>
             </div>
             <div className='stock-title'>
-              <h1>${stockData.price}</h1>
+              <h1>{formatCurrency(stockData.price)}</h1>
             </div>
           </div>
 

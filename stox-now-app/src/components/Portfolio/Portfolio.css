@@ -41,6 +41,11 @@
     padding-left: 50px;
 }
 
+.number-font{
+    
+  font-family: "Oswald", sans-serif;
+}
+
 
 .portfolio-titles-sort {
     cursor: pointer;

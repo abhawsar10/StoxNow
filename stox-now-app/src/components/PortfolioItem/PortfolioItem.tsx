@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './PortfolioItem.css'
 import { buyStock, sellStock } from '../../services/api';
+import { formatCurrency } from '../../services/currencyFormatter';
 
 interface PortfolioItemProps {
     portfolioStock: {
@@ -65,7 +66,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({portfolioStock, getPortfol
                 <h3>{portfolioStock.quantity.toFixed(2)}</h3>
             </div>
             <div>
-                <h3>$ {portfolioStock.value.toFixed(2)}</h3>
+                <h3>{formatCurrency(portfolioStock.value)}</h3>
             </div>
 
             <div className="quantity-selector">
