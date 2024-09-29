@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Portfolio.css'
-import { fetchPortfolio } from '../../services/api';
+import { fetchPortfolio, updatePortfolio } from '../../services/api';
 import { formatCurrency } from '../../services/currencyFormatter';
 import PortfolioItem from '../PortfolioItem/PortfolioItem';
 
@@ -45,6 +45,7 @@ const Portfolio: React.FC = () => {
     };
 
     useEffect(()=>{
+        updatePortfolio();
         getPortfolio();
     },[])
     

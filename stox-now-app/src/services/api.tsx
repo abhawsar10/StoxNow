@@ -44,3 +44,12 @@ export const fetchPortfolio = async () => {
   const data = await response.json();
   return data;
 };
+
+export const updatePortfolio = async () => {
+  const response = await fetch(`${API_BASE_URL}/update-portfolio`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+  return data;
+};
