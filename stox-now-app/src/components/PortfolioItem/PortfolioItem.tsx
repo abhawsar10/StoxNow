@@ -38,7 +38,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({portfolioStock, getPortfol
     return (
         <div className='portfolio-stock'>
             <div>
-                {portfolioStock.ticker}
+                <h3>{portfolioStock.ticker}</h3>
             </div>
             <div>
                 {portfolioStock.quantity.toFixed(2)}

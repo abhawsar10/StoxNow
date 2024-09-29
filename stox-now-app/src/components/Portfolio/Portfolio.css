@@ -2,17 +2,40 @@
     color: white;
     width: 100%;
     max-width: 1000px;
+    margin-bottom: 100px;
 }
 
-.portfolio-stock {
+.portfolio-header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column ;
     justify-content: space-between;
-    background-color: #301a39;
     text-align: center;
+    background-color: #301a39;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     margin: 20px;
     padding: 20px;
     box-sizing: border-box; 
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.portfolio-header-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.portfolio-titles {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    border-radius: 20px;
+    margin: 20px;
+    box-sizing: border-box; 
+    padding-left: 50px;
+    padding-right: 50px;
 }
