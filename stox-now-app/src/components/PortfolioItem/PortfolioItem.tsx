@@ -18,8 +18,14 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({portfolioStock, getPortfol
     
 
     const handleSell = async () => {
-        if (sellQuantity <= 0 || sellQuantity > portfolioStock.quantity) {
+        if (sellQuantity <= 0) {
             alert('Please select a valid quantity to sell.');
+            setSellQuantity(0);
+            return;
+        }
+        if (sellQuantity > portfolioStock.quantity) {
+            alert('Not enough stocks to sell.');
+            setSellQuantity(0);
             return;
         }
         try {
@@ -27,7 +33,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({portfolioStock, getPortfol
             await sellStock(portfolioStock.ticker, sellQuantity);
             alert(`Successfully Sold ${sellQuantity} Stock(s) of ${portfolioStock.ticker}`);
             getPortfolio();
-            setSellQuantity(1);
+            setSellQuantity(0);
 
         } catch (error: any) {
             alert(error.message);
@@ -38,23 +44,24 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({portfolioStock, getPortfol
     return (
         <div className='portfolio-stock'>
             <div>
-                <h3>{portfolioStock.ticker}</h3>
+                <h2>{portfolioStock.ticker}</h2>
             </div>
             <div>
-                {portfolioStock.quantity.toFixed(2)}
+                <h3>{portfolioStock.quantity.toFixed(2)}</h3>
             </div>
             <div>
-                ${portfolioStock.value.toFixed(2)}
+                <h3>$ {portfolioStock.value.toFixed(2)}</h3>
             </div>
 
             <div className="quantity-selector">
                 <input
-                type="number"
-                min="1"
-                value={sellQuantity}
-                onChange={(e) => setSellQuantity(Number(e.target.value))}
+                    className='quantity-input'
+                    type="number"
+                    min="0"
+                    value={sellQuantity}
+                    onChange={(e) => setSellQuantity(Number(e.target.value))}
                 />
-                <button className='buy-button' onClick={handleSell}>Sell</button>
+                <button className='sell-button' onClick={handleSell}>Sell</button>
             </div>
 
         </div>

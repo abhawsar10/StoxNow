@@ -32,10 +32,9 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     border-radius: 20px;
     margin: 20px;
     box-sizing: border-box; 
-    padding-left: 50px;
     padding-right: 50px;
 }
