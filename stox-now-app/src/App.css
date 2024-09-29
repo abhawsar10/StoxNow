@@ -7,20 +7,42 @@
 
 .App-header {
   height: 120px;
+  padding-left: 50px;
+  padding-right: 50px; 
   display: flex;
   background-color: #301a39;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  font-size: 30px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.App-header nav {
+  display: flex;
+  gap: 20px;
+}
+
+.App-header a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.App-header a:hover {
+  color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.App-header a.active {
+  color: #f39c12;
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   min-height: calc(100vh - 120px);
   width: 100%;
   text-align: center;
