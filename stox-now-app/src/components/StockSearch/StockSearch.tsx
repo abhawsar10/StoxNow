@@ -54,12 +54,19 @@ const StockSearch: React.FC = () => {
 
       {stockData && (
         <div className="stock-container">
-          <h2>{stockData.symbol}</h2>
-          <h3>{stockData.name}</h3>
-          <h3>Price: ${stockData.price}</h3>
-          {/* <button className='buy-button'>Buy</button> */}
-          <div className="quantity-selector">
+          <div className='stock-info'>
+            <div className='stock-title'>
+              <h1>{stockData.symbol}</h1>
+              <h2>{stockData.name}</h2>
+            </div>
+            <div className='stock-title'>
+              <h1>${stockData.price}</h1>
+            </div>
+          </div>
+
+          <div>
             <input
+              className='quantity-input'
               type="number"
               min="1"
               value={buyQuantity}
