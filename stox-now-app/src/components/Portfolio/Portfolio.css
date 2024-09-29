@@ -1,7 +1,7 @@
 .portfolio-container {
     color: white;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1300px;
     margin-bottom: 100px;
     margin-top: 20px;
 }
@@ -33,15 +33,16 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     border-radius: 20px;
     margin: 20px;
     box-sizing: border-box; 
     padding-right: 50px;
+    padding-left: 50px;
 }
 
 
-.portfolio-titles div {
+.portfolio-titles-sort {
     cursor: pointer;
     user-select: none;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './PortfolioItem.css'
-import { sellStock } from '../../services/api';
+import { buyStock, sellStock } from '../../services/api';
 
 interface PortfolioItemProps {
     portfolioStock: {
@@ -14,8 +14,7 @@ interface PortfolioItemProps {
 const PortfolioItem: React.FC<PortfolioItemProps> = ({portfolioStock, getPortfolio}) => {
 
     const [sellQuantity, setSellQuantity] = useState(0)
-
-    
+    const [buyQuantity, setBuyQuantity] = useState(0); 
 
     const handleSell = async () => {
         if (sellQuantity <= 0) {
@@ -39,6 +38,22 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({portfolioStock, getPortfol
             alert(error.message);
         }
     };
+    
+    const handleBuy = async () => {
+        if (buyQuantity <= 0) {
+            alert('Please select a valid quantity.');
+            return;
+        }
+        try {
+            await buyStock(portfolioStock.ticker, buyQuantity);
+            alert(`Successfully bought ${buyQuantity} Stock(s) of ${portfolioStock.ticker}`);
+            getPortfolio();
+            setBuyQuantity(0);
+        } catch (error: any) {
+            alert(error.message);
+        }
+    };
+
 
     
     return (
@@ -62,7 +77,18 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({portfolioStock, getPortfol
                     onChange={(e) => setSellQuantity(Number(e.target.value))}
                 />
                 <button className='sell-button' onClick={handleSell}>Sell</button>
+                <input
+                    className='quantity-input'
+                    type="number"
+                    min="0"
+                    value={buyQuantity}
+                    onChange={(e) => setBuyQuantity(Number(e.target.value))}
+                />
+                <button className='buy-button' onClick={handleBuy}>Buy</button>
             </div>
+
+            {/* <div className="quantity-selector">
+            </div> */}
 
         </div>
     );

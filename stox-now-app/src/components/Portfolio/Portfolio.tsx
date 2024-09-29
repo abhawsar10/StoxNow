@@ -60,16 +60,17 @@ const Portfolio: React.FC = () => {
                 </div>
             </div>
             <div className='portfolio-titles'>
-                <div onClick={() => sortPortfolio('ticker')}>
+                <div onClick={() => sortPortfolio('ticker')} className='portfolio-titles-sort'>
                     Ticker {sortConfig?.key === 'ticker' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                 </div>
-                <div onClick={() => sortPortfolio('quantity')}>
+                <div onClick={() => sortPortfolio('quantity')} className='portfolio-titles-sort'>
                     Quantity {sortConfig?.key === 'quantity' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                 </div>
-                <div onClick={() => sortPortfolio('value')}>
+                <div onClick={() => sortPortfolio('value')} className='portfolio-titles-sort'>
                     Current Value {sortConfig?.key === 'value' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                 </div>
-                <>Option</>
+                <div>Sell</div>
+                <div>Buy</div>
             </div>
             {portfolio.map((item)=>(
                 <PortfolioItem key={item.ticker} portfolioStock={item} getPortfolio={getPortfolio} />
