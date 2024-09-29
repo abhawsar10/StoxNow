@@ -40,6 +40,12 @@ const StockSearch: React.FC = () => {
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
 
   return (
     <div className="stock-search">
@@ -52,6 +58,7 @@ const StockSearch: React.FC = () => {
           value={ticker}
           onChange={(e) => setTicker(e.target.value.toUpperCase())}
           placeholder="Enter stock symbol (e.g. AAPL)"
+          onKeyDown={handleKeyDown} 
         />
         <button className='search-button' onClick={handleSearch}>Search</button>
       </div>
