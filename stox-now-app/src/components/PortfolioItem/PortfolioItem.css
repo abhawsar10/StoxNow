@@ -1,69 +1,85 @@
-.portfolio-stock {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
+.portfolio-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.portfolio-table tr {
+    height: 20px;
     background-color: #301a39;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    margin: 20px;
-    padding: 20px;
-    padding-left:40px;
-    padding-right:40px;
-    height: 80px;
-    box-sizing: border-box; 
+    transition: background-color 0.3s ease;
+}
+
+.portfolio-table tr:nth-child(even) {
+    background-color: #3d2249;
+}
+
+.portfolio-table tr:hover {
+    background-color: #4a2a59;
+}
+
+.portfolio-table td {
+    padding: 0px 40px;
+    text-align: center;
+    border: none;
+}
+.portfolio-table .td-right {
+    text-align: right;
+}
+
+.portfolio-table td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.portfolio-table td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .quantity-selector {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    text-align: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    padding: 0;
 }
 
-.quantity-input{
+.quantity-input {
     background-color: #1e2126;
     border: 2px solid #4a4e54;
     color: white;
     border-radius: 5px;
-    font-size: 20px;
-    padding: 10px;
-    width: 50px;
+    font-size: 16px;
+    padding: 8px;
+    width: 60px;
     height: 20px;
     margin-right: 10px;
 }
 
-.sell-button{
-    background-color: #910d0d;
+.sell-button, .buy-button {
     color: white;
     border: none;
     border-radius: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-    height: 40px;
+    padding: 8px 15px;
+    height: 36px;
     cursor: pointer;
-    font-size: 20px;
-    transition: all 0.1s ease, transform 0.3s ease;
-    margin-right: 30px;
-}
-.sell-button:hover{
-    background-color: #540808;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    margin-left: 10px;
 }
 
-.buy-button{
-    background-color: #099609;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-    height: 40px;
-    cursor: pointer;
-    font-size: 20px;
-    transition: all 0.1s ease, transform 0.3s ease;
+.sell-button {
+    background-color: #910d0d;
 }
-.buy-button:hover{
-    background-color: #054205;
+
+.sell-button:hover {
+    background-color: #6e0a0a;
+}
+
+.buy-button {
+    background-color: #099609;
+}
+
+.buy-button:hover {
+    background-color: #076f07;
 }

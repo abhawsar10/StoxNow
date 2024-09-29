@@ -58,40 +58,41 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({portfolioStock, getPortfol
 
     
     return (
-        <div className='portfolio-stock'>
-            <div>
+        <tr>
+            <td className='td'>
                 <h2>{portfolioStock.ticker}</h2>
-            </div>
-            <div>
+            </td>
+            <td className='td td-right'>
                 <h3>{portfolioStock.quantity.toFixed(2)}</h3>
-            </div>
-            <div>
-                <h3>{formatCurrency(portfolioStock.value)}</h3>
-            </div>
-
-            <div className="quantity-selector">
-                <input
-                    className='quantity-input'
-                    type="number"
-                    min="0"
-                    value={sellQuantity}
-                    onChange={(e) => setSellQuantity(Number(e.target.value))}
-                />
-                <button className='sell-button' onClick={handleSell}>Sell</button>
-                <input
-                    className='quantity-input'
-                    type="number"
-                    min="0"
-                    value={buyQuantity}
-                    onChange={(e) => setBuyQuantity(Number(e.target.value))}
-                />
-                <button className='buy-button' onClick={handleBuy}>Buy</button>
-            </div>
-
-            {/* <div className="quantity-selector">
-            </div> */}
-
-        </div>
+            </td>
+            <td className='td td-right'>
+                 <h3>{formatCurrency(portfolioStock.value)}</h3>
+            </td>
+            <td className='td'>
+                <div className="quantity-selector">
+                    <input
+                        className='quantity-input'
+                        type="number"
+                        min="0"
+                        value={sellQuantity}
+                        onChange={(e) => setSellQuantity(Number(e.target.value))}
+                    />
+                    <button className='sell-button' onClick={handleSell}>Sell</button>
+                </div>
+            </td>
+            <td className='td'>
+                <div className="quantity-selector">
+                    <input
+                        className='quantity-input'
+                        type="number"
+                        min="0"
+                        value={buyQuantity}
+                        onChange={(e) => setBuyQuantity(Number(e.target.value))}
+                    />
+                    <button className='buy-button' onClick={handleBuy}>Buy</button>
+                </div>
+            </td>
+        </tr>
     );
 };
 

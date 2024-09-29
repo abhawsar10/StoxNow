@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Portfolio.css'
 import { fetchPortfolio } from '../../services/api';
-import PortfolioItem from '../PortfolioItem/PortfolioItem';
 import { formatCurrency } from '../../services/currencyFormatter';
+import PortfolioItem from '../PortfolioItem/PortfolioItem';
 
 const Portfolio: React.FC = () => {
     
@@ -60,7 +60,10 @@ const Portfolio: React.FC = () => {
                     <h2 className='number-font'>{totalStocks.toFixed(2)}</h2>
                 </div>
             </div>
-            <div className='portfolio-titles'>
+
+            {/* <PortfolioTable portfolio={portfolio} getPortfolio={getPortfolio} sortPortfolio={sortPortfolio} /> */}
+
+            {/* <div className='portfolio-titles'>
                 <div onClick={() => sortPortfolio('ticker')} className='portfolio-titles-sort'>
                     Ticker {sortConfig?.key === 'ticker' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
                 </div>
@@ -73,9 +76,40 @@ const Portfolio: React.FC = () => {
                 <div>Sell</div>
                 <div>Buy</div>
             </div>
-            {portfolio.map((item)=>(
-                <PortfolioItem key={item.ticker} portfolioStock={item} getPortfolio={getPortfolio} />
-            ))}
+             */}
+
+            <table className='portfolio-table'>
+                <thead>
+                    <tr className='thead' >
+                        <th className='th'>
+                            <div onClick={() => sortPortfolio('ticker')} className='portfolio-titles-sort'>
+                                Ticker {sortConfig?.key === 'ticker' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                            </div>
+                        </th>
+                        <th className='th'>
+                            <div onClick={() => sortPortfolio('quantity')} className='portfolio-titles-sort'>
+                                Quantity {sortConfig?.key === 'quantity' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                            </div>
+                        </th> 
+                        <th className='th'>
+                            <div onClick={() => sortPortfolio('value')} className='portfolio-titles-sort'>
+                                Current Value {sortConfig?.key === 'value' && (sortConfig.direction === 'ascending' ? '▲' : '▼')}
+                            </div>
+                        </th>
+                        <th className='th'>Sell</th>
+                        <th className='th'>Buy</th>
+                    </tr>
+                    
+                </thead>
+                <tbody className='tbody'>
+                    
+                    {portfolio.map((item)=>(
+                        <PortfolioItem key={item.ticker} portfolioStock={item} getPortfolio={getPortfolio} />
+                    ))}
+
+                </tbody>
+            </table>
+
         </div>
     );
 };
