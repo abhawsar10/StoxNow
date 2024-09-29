@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import StockSearch from './components/StockSearch/StockSearch';
+import Portfolio from './components/Portfolio/Portfolio';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       </header>
       <main>
         <StockSearch />
-        {/* <Portfolio /> */}
+        <Portfolio />
       </main>
     </div>
   );
