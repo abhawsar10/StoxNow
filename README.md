@@ -31,7 +31,9 @@ pip install -r requirements.txt
 # Run the Flask server
 python app.py
 ```
-This will start the Flask backend on http://127.0.0.1:5000
+This will start the Flask backend on http://127.0.0.1:5000. 
+
+In case the Flask server runs on another port, you will need to update the `API_BASE_URL` in the `\stox-now-app\src\services\api.tsx` file to the address it uses.
 
 ### Frontend Setup (React)
 Next, set up and run the React frontend.
